@@ -1,0 +1,26 @@
+package com.kartik1;
+
+public class frog {
+    public static void main(String[] args) {
+
+        int[] height = {30,10,60,10,60,50};
+        int n = 5;
+        int[] dp = new int[n+1];
+        System.out.println(rec(n,height,dp));
+    }
+    static int rec(int n , int[] height,int[] dp){
+        if(n==0){
+            return 0;
+        }
+        if(dp[n] != 0){
+            return dp[n];
+        }
+        int left = rec(n-1,height,dp) + Math.abs(height[n] - height[n-1]);
+        int right = Integer.MAX_VALUE;
+        if(n>1){
+            right = rec(n-2,height,dp) + Math.abs(height[n] - height[n-2]);
+        }
+        dp[n] = Math.min(left,right);
+        return dp[n];
+    }
+}
